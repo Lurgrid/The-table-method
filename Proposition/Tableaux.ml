@@ -37,7 +37,6 @@ let rec foo (atoms : formule list) : formule list -> bool = function
       | Ou (f, g) -> foo atoms ([ f ] @ xs) || foo atoms ([ g ] @ xs)
       | Non (Et (f, g)) ->
           foo atoms ([ Non f ] @ xs) || foo atoms ([ Non g ] @ xs)
-      | Non (Non f) -> foo atoms (f :: xs)
       | _ -> foo atoms (transform x :: xs))
 
 (* Teste si une formule est satisfaisable, selon la méthode des tableaux.  *)
@@ -222,7 +221,6 @@ let rec test y = function
   | 0 -> []
   | n ->
       let f = random_form [ "a"; "b"; "c"; "d"; "e" ] y in
-      Printf.fprintf stderr "%s\n" (string_of_formule f);
       if quine_sat f <> tableau_sat f then [ f ] else test y (n - 1)
 
 let a = Nor (Diff (Atome "b", Atome "c"), Atome "d")
