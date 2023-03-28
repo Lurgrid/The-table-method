@@ -32,10 +32,11 @@ let rec foo (atoms : formule list) : formule list -> bool = function
       | Non (Atome a) ->
           if List.exists (fun x -> x = Atome a) atoms then false
           else foo (x :: atoms) xs
-      | Et (f, g) -> foo atoms [ f; g ]
-      | Non (Ou (f, g)) -> foo atoms [ Non f; Non g ]
-      | Ou (f, g) -> foo atoms [ f ] || foo atoms [ g ]
-      | Non (Et (f, g)) -> foo atoms [ Non f ] || foo atoms [ Non g ]
+      | Et (f, g) -> foo atoms ([ f; g ] @ xs)
+      | Non (Ou (f, g)) -> foo atoms ([ Non f; Non g ] @ xs)
+      | Ou (f, g) -> foo atoms ([ f ] @ xs) || foo atoms ([ g ] @ xs)
+      | Non (Et (f, g)) ->
+          foo atoms ([ Non f ] @ xs) || foo atoms ([ Non g ] @ xs)
       | Non (Non f) -> foo atoms (f :: xs)
       | _ -> foo atoms (transform x :: xs))
 
