@@ -34,7 +34,6 @@ let rec string_of_formule : formule -> string = function
   | Diff (f, g) ->
       String.concat ""
         [ "("; string_of_formule f; " ﹨ "; string_of_formule g; ")" ]
-      (*n'est pas afficher jsp pouquoi*)
   | Xor (f, g) ->
       String.concat ""
         [ "("; string_of_formule f; " ⊕  "; string_of_formule g; ")" ]

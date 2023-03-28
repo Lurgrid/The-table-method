@@ -1,1 +1,1 @@
-Proposition/Tableaux.ml: Formule
+Proposition/Tableaux.ml: Formule List Printf RandomFormule
