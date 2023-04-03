@@ -37,10 +37,11 @@ let rec foo (atoms : formule list) : formule list -> bool * formule list =
       | Et (f, g) -> foo atoms ([ f; g ] @ xs)
       | Non (Ou (f, g)) -> foo atoms ([ Non f; Non g ] @ xs)
       | Ou (f, g) ->
-          (fst (foo atoms ([ f ] @ xs)) || fst (foo atoms ([ g ] @ xs)), atoms)
+          let a, b = foo atoms ([ f ] @ xs) in
+          if a then (a, b) else foo atoms ([ g ] @ xs)
       | Non (Et (f, g)) ->
-          ( fst (foo atoms ([ Non f ] @ xs)) || fst (foo atoms ([ Non g ] @ xs)),
-            atoms )
+          let a, b = foo atoms ([ Non f ] @ xs) in
+          if a then (a, b) else foo atoms ([ Non g ] @ xs)
       | _ -> foo atoms (transform x :: xs))
 
 (* Teste si une formule est satisfaisable, selon la méthode des tableaux.  *)
@@ -49,17 +50,18 @@ let tableau_sat (f : formule) : bool = fst (foo [] [ f ])
 (* Teste si une formule est satisfaisable, renvoyant None si ce n'est pas le cas
       et Some res sinon, où res est une liste de couples (atome, Booléen)
       suffisants pour que la formule soit vraie. *)
-let tableau_ex_sat (f : formule) : formule list option =
+let tableau_ex_sat (f : formule) : (string * bool) list option =
   let r = foo [] [ f ] in
-  if not (fst r) then None else Some (snd r)
-
-(* (List.map
-   (fun f ->
-     match f with
-     | Atome a -> (a, true)
-     | Non (Atome a) -> (a, false)
-     | _ -> failwith "sa ne fonctionne pas la")
-   (snd r)) *)
+  if not (fst r) then None
+  else
+    Some
+      (List.map
+         (fun f ->
+           match f with
+           | Atome a -> (a, true)
+           | Non (Atome a) -> (a, false)
+           | _ -> failwith "sa ne fonctionne pas la")
+         (snd r))
 
 (* Renvoie la liste des listes de couples (atome, Booléen) suffisants pour que
       la formule soit vraie, selon la méthode des tableaux.*)
