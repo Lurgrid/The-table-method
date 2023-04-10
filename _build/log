@@ -1,10 +1,9 @@
 # dune utop
 # OCAMLPARAM: unset
 # Shared cache: disabled
-# Workspace root: "/home/renauth6/Documents/Cour/Fac/L2/Outils pour le
-# raisonnement propositionnel/The-table-method"
+# Workspace root: /home/lurgrid/Documents/GitHub/The-table-method
 # Auto-detected concurrency: 8
-$ /home/renauth6/.opam/4.14.1/bin/ocamlc.opt -config > /tmp/dune_8cd6ee_output
+$ /usr/bin/ocamlc.opt -config > /tmp/dune_1a53f9_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -13,75 +12,115 @@ $ /home/renauth6/.opam/4.14.1/bin/ocamlc.opt -config > /tmp/dune_8cd6ee_output
 #  ; for_host = None
 #  ; fdo_target_exe = None
 #  ; build_dir = In_build_dir "default"
-#  ; toplevel_path = Some External "/home/renauth6/.opam/4.14.1/lib/toplevel"
-#  ; ocaml_bin = External "/home/renauth6/.opam/4.14.1/bin"
-#  ; ocaml = Ok External "/home/renauth6/.opam/4.14.1/bin/ocaml"
-#  ; ocamlc = External "/home/renauth6/.opam/4.14.1/bin/ocamlc.opt"
-#  ; ocamlopt = Ok External "/home/renauth6/.opam/4.14.1/bin/ocamlopt.opt"
-#  ; ocamldep = Ok External "/home/renauth6/.opam/4.14.1/bin/ocamldep.opt"
-#  ; ocamlmklib = Ok External "/home/renauth6/.opam/4.14.1/bin/ocamlmklib.opt"
+#  ; toplevel_path = Some External "/home/lurgrid/.opam/default/lib/toplevel"
+#  ; ocaml_bin = External "/usr/bin"
+#  ; ocaml = Ok External "/home/lurgrid/.opam/default/bin/ocaml"
+#  ; ocamlc = External "/usr/bin/ocamlc.opt"
+#  ; ocamlopt = Ok External "/usr/bin/ocamlopt.opt"
+#  ; ocamldep = Ok External "/usr/bin/ocamldep.opt"
+#  ; ocamlmklib = Ok External "/usr/bin/ocamlmklib.opt"
 #  ; env =
 #      map
-#        { "DUNE_OCAML_HARDCODED" : "/home/renauth6/.opam/4.14.1/lib"
-#        ; "DUNE_OCAML_STDLIB" : "/home/renauth6/.opam/4.14.1/lib/ocaml"
+#        { "DUNE_OCAML_HARDCODED" : "/home/lurgrid/.opam/default/lib"
+#        ; "DUNE_OCAML_STDLIB" : "/usr/lib/ocaml"
 #        ; "DUNE_SOURCEROOT" :
-#            "/home/renauth6/Documents/Cour/Fac/L2/Outils pour le raisonnement propositionnel/The-table-method"
+#            "/home/lurgrid/Documents/GitHub/The-table-method"
 #        ; "INSIDE_DUNE" :
-#            "/home/renauth6/Documents/Cour/Fac/L2/Outils pour le raisonnement propositionnel/The-table-method/_build/default"
+#            "/home/lurgrid/Documents/GitHub/The-table-method/_build/default"
 #        ; "OCAMLFIND_IGNORE_DUPS_IN" :
-#            "/home/renauth6/Documents/Cour/Fac/L2/Outils pour le raisonnement propositionnel/The-table-method/_build/install/default/lib"
+#            "/home/lurgrid/Documents/GitHub/The-table-method/_build/install/default/lib"
 #        ; "OCAMLPATH" :
-#            "/home/renauth6/Documents/Cour/Fac/L2/Outils pour le raisonnement propositionnel/The-table-method/_build/install/default/lib"
+#            "/home/lurgrid/Documents/GitHub/The-table-method/_build/install/default/lib"
 #        ; "OCAMLTOP_INCLUDE_PATH" :
-#            "/home/renauth6/Documents/Cour/Fac/L2/Outils pour le raisonnement propositionnel/The-table-method/_build/install/default/lib/toplevel"
+#            "/home/lurgrid/Documents/GitHub/The-table-method/_build/install/default/lib/toplevel"
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
-#  ; findlib_paths = [ External "/home/renauth6/.opam/4.14.1/lib" ]
+#  ; findlib_paths = [ External "/home/lurgrid/.opam/default/lib" ]
 #  ; arch_sixtyfour = true
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
-#      { version = "4.14.1"
-#      ; standard_library_default = "/home/renauth6/.opam/4.14.1/lib/ocaml"
-#      ; standard_library = "/home/renauth6/.opam/4.14.1/lib/ocaml"
+#      { version = "4.13.1"
+#      ; standard_library_default = "/usr/lib/ocaml"
+#      ; standard_library = "/usr/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
-#      ; c_compiler = "gcc"
+#      ; c_compiler = "x86_64-linux-gnu-gcc"
 #      ; ocamlc_cflags =
-#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
-#      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
+#          [ "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-g"
+#          ; "-O2"
+#          ; "-ffile-prefix-map=/build/ocaml-SC7b9w/ocaml-4.13.1=."
+#          ; "-fstack-protector-strong"
+#          ; "-Wformat"
+#          ; "-Werror=format-security"
+#          ]
+#      ; ocamlc_cppflags =
+#          [ "-D_FILE_OFFSET_BITS=64"; "-Wdate-time"; "-D_FORTIFY_SOURCE=2" ]
 #      ; ocamlopt_cflags =
-#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
-#      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
+#          [ "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-g"
+#          ; "-O2"
+#          ; "-ffile-prefix-map=/build/ocaml-SC7b9w/ocaml-4.13.1=."
+#          ; "-fstack-protector-strong"
+#          ; "-Wformat"
+#          ; "-Werror=format-security"
+#          ]
+#      ; ocamlopt_cppflags =
+#          [ "-D_FILE_OFFSET_BITS=64"; "-Wdate-time"; "-D_FORTIFY_SOURCE=2" ]
 #      ; bytecomp_c_compiler =
-#          [ "gcc"
+#          [ "x86_64-linux-gnu-gcc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-pthread"
 #          ; "-fPIC"
+#          ; "-g"
+#          ; "-O2"
+#          ; "-ffile-prefix-map=/build/ocaml-SC7b9w/ocaml-4.13.1=."
+#          ; "-fstack-protector-strong"
+#          ; "-Wformat"
+#          ; "-Werror=format-security"
 #          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-Wdate-time"
+#          ; "-D_FORTIFY_SOURCE=2"
 #          ]
 #      ; bytecomp_c_libraries = [ "-lm"; "-lpthread" ]
 #      ; native_c_compiler =
-#          [ "gcc"
+#          [ "x86_64-linux-gnu-gcc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-pthread"
 #          ; "-fPIC"
+#          ; "-g"
+#          ; "-O2"
+#          ; "-ffile-prefix-map=/build/ocaml-SC7b9w/ocaml-4.13.1=."
+#          ; "-fstack-protector-strong"
+#          ; "-Wformat"
+#          ; "-Werror=format-security"
 #          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-Wdate-time"
+#          ; "-D_FORTIFY_SOURCE=2"
 #          ]
 #      ; native_c_libraries = [ "-lm" ]
-#      ; native_pack_linker = [ "ld"; "-r"; "-o" ]
+#      ; native_pack_linker = [ "x86_64-linux-gnu-ld"; "-r"; "-o" ]
 #      ; cc_profile = []
 #      ; architecture = "amd64"
 #      ; model = "default"
 #      ; int_size = 63
 #      ; word_size = 64
 #      ; system = "linux"
-#      ; asm = [ "as" ]
+#      ; asm = [ "x86_64-linux-gnu-as" ]
 #      ; asm_cfi_supported = true
 #      ; with_frame_pointers = false
 #      ; ext_exe = ""
@@ -98,20 +137,18 @@ $ /home/renauth6/.opam/4.14.1/bin/ocamlc.opt -config > /tmp/dune_8cd6ee_output
 #      ; flambda = false
 #      ; spacetime = false
 #      ; safe_string = true
-#      ; exec_magic_number = "Caml1999X031"
-#      ; cmi_magic_number = "Caml1999I031"
-#      ; cmo_magic_number = "Caml1999O031"
-#      ; cma_magic_number = "Caml1999A031"
-#      ; cmx_magic_number = "Caml1999Y031"
-#      ; cmxa_magic_number = "Caml1999Z031"
-#      ; ast_impl_magic_number = "Caml1999M031"
-#      ; ast_intf_magic_number = "Caml1999N031"
-#      ; cmxs_magic_number = "Caml1999D031"
-#      ; cmt_magic_number = "Caml1999T031"
+#      ; exec_magic_number = "Caml1999X030"
+#      ; cmi_magic_number = "Caml1999I030"
+#      ; cmo_magic_number = "Caml1999O030"
+#      ; cma_magic_number = "Caml1999A030"
+#      ; cmx_magic_number = "Caml1999Y030"
+#      ; cmxa_magic_number = "Caml1999Z030"
+#      ; ast_impl_magic_number = "Caml1999M030"
+#      ; ast_intf_magic_number = "Caml1999N030"
+#      ; cmxs_magic_number = "Caml1999D030"
+#      ; cmt_magic_number = "Caml1999T030"
 #      ; natdynlink_supported = true
 #      ; supports_shared_libraries = true
 #      ; windows_unicode = false
 #      }
 #  }
-$ (cd _build/default && /home/renauth6/.opam/4.14.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -bin-annot -I .utop/.utop.eobjs/byte -I /home/renauth6/.opam/4.14.1/lib/findlib -I /home/renauth6/.opam/4.14.1/lib/lambda-term -I /home/renauth6/.opam/4.14.1/lib/logs -I /home/renauth6/.opam/4.14.1/lib/lwt -I /home/renauth6/.opam/4.14.1/lib/lwt/unix -I /home/renauth6/.opam/4.14.1/lib/lwt_react -I /home/renauth6/.opam/4.14.1/lib/mew -I /home/renauth6/.opam/4.14.1/lib/mew_vi -I /home/renauth6/.opam/4.14.1/lib/ocaml/compiler-libs -I /home/renauth6/.opam/4.14.1/lib/ocaml/threads -I /home/renauth6/.opam/4.14.1/lib/ocplib-endian -I /home/renauth6/.opam/4.14.1/lib/ocplib-endian/bigstring -I /home/renauth6/.opam/4.14.1/lib/react -I /home/renauth6/.opam/4.14.1/lib/result -I /home/renauth6/.opam/4.14.1/lib/trie -I /home/renauth6/.opam/4.14.1/lib/uchar -I /home/renauth6/.opam/4.14.1/lib/utop -I /home/renauth6/.opam/4.14.1/lib/uucp -I /home/renauth6/.opam/4.14.1/lib/uuseg -I /home/renauth6/.opam/4.14.1/lib/uutf -I /home/renauth6/.opam/4.14.1/lib/zed -I Proposition/.Proposition.objs/byte -no-alias-deps -o .utop/.utop.eobjs/byte/dune__exe__Utop.cmo -c -impl .utop/utop.ml-gen)
-$ (cd _build/default && /home/renauth6/.opam/4.14.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -o .utop/utop.exe -output-complete-exe /home/renauth6/.opam/4.14.1/lib/ocaml/compiler-libs/ocamlcommon.cma /home/renauth6/.opam/4.14.1/lib/ocaml/compiler-libs/ocamlbytecomp.cma /home/renauth6/.opam/4.14.1/lib/ocaml/compiler-libs/ocamltoplevel.cma /home/renauth6/.opam/4.14.1/lib/findlib/findlib.cma /home/renauth6/.opam/4.14.1/lib/findlib/findlib_top.cma /home/renauth6/.opam/4.14.1/lib/logs/logs.cma -I /home/renauth6/.opam/4.14.1/lib/ocaml /home/renauth6/.opam/4.14.1/lib/lwt/lwt.cma /home/renauth6/.opam/4.14.1/lib/logs/logs_lwt.cma /home/renauth6/.opam/4.14.1/lib/ocaml/unix.cma -I /home/renauth6/.opam/4.14.1/lib/ocaml /home/renauth6/.opam/4.14.1/lib/ocaml/bigarray.cma -I /home/renauth6/.opam/4.14.1/lib/ocaml /home/renauth6/.opam/4.14.1/lib/ocplib-endian/ocplib_endian.cma /home/renauth6/.opam/4.14.1/lib/ocplib-endian/bigstring/ocplib_endian_bigstring.cma /home/renauth6/.opam/4.14.1/lib/ocaml/threads/threads.cma -I /home/renauth6/.opam/4.14.1/lib/ocaml /home/renauth6/.opam/4.14.1/lib/lwt/unix/lwt_unix.cma -I /home/renauth6/.opam/4.14.1/lib/lwt/unix /home/renauth6/.opam/4.14.1/lib/react/react.cma /home/renauth6/.opam/4.14.1/lib/lwt_react/lwt_react.cma /home/renauth6/.opam/4.14.1/lib/result/result.cma /home/renauth6/.opam/4.14.1/lib/uutf/uutf.cma /home/renauth6/.opam/4.14.1/lib/uucp/uucp.cma /home/renauth6/.opam/4.14.1/lib/uuseg/uuseg.cma /home/renauth6/.opam/4.14.1/lib/zed/zed.cma /home/renauth6/.opam/4.14.1/lib/trie/trie.cma /home/renauth6/.opam/4.14.1/lib/mew/mew.cma /home/renauth6/.opam/4.14.1/lib/mew_vi/mew_vi.cma /home/renauth6/.opam/4.14.1/lib/lambda-term/lambda_term.cma -I /home/renauth6/.opam/4.14.1/lib/lambda-term /home/renauth6/.opam/4.14.1/lib/utop/uTop.cma Proposition/Proposition.cma .utop/.utop.eobjs/byte/dune__exe__Utop.cmo -linkall -warn-error -31)

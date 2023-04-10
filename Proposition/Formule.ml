@@ -16,7 +16,7 @@ type formule =
 
 exception UnknowSymbole of string
 
-(* string_of_formule, Conversion d'une formule en chaîne de caractères. *)
+(** string_of_formule, Conversion d'une formule en chaîne de caractères. *)
 let rec string_of_formule : formule -> string = function
   | Bot -> "⊥"
   | Top -> "T"
