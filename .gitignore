@@ -1,2 +1,2 @@
-!*.ml
-!dune
+_build/*
+_build
