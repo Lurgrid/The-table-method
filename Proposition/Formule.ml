@@ -16,7 +16,7 @@ type formule =
 
 exception UnknowSymbole of string
 
-(* Conversion d'une formule en chaîne de caractères. *)
+(* string_of_formule, Conversion d'une formule en chaîne de caractères. *)
 let rec string_of_formule : formule -> string = function
   | Bot -> "⊥"
   | Top -> "T"
@@ -33,7 +33,7 @@ let rec string_of_formule : formule -> string = function
   | Non f -> String.concat "" [ "¬"; string_of_formule f ]
   | Diff (f, g) ->
       String.concat ""
-        [ "("; string_of_formule f; " ﹨ "; string_of_formule g; ")" ]
+        [ "("; string_of_formule f; " \\ "; string_of_formule g; ")" ]
   | Xor (f, g) ->
       String.concat ""
         [ "("; string_of_formule f; " ⊕  "; string_of_formule g; ")" ]
@@ -50,7 +50,7 @@ let rec string_of_formule : formule -> string = function
 type interpretation = string -> bool
 (** Type des interprétations. *)
 
-(** Évalue une formule en fonction d'une interprétation. *)
+(** eval, Évalue une formule en fonction d'une interprétation. *)
 let rec eval (i : interpretation) : formule -> bool = function
   | Et (f, g) -> eval i f && eval i g
   | Ou (f, g) -> eval i f || eval i g
@@ -64,5 +64,3 @@ let rec eval (i : interpretation) : formule -> bool = function
   | Atome c -> i c
   | Bot -> false
   | Top -> true
-
-let a = Imp (Ou (Et (Atome "a", Atome "b"), Atome "c"), Non (Atome "d"))

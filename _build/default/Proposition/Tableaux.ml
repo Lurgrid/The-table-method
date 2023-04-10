@@ -1,12 +1,11 @@
 open Formule
 
-(*------------------------------------------------------------------------------*)
+(*----------------------------------------------------------------------------*)
 open RandomFormule
-(*----------------------d------------------------------------------------------*)
+(*----------------------------------------------------------------------------*)
 
-(* transform f renvoie la conversion du dernière opérateur en combinaison de
+(** transform f, renvoie la conversion du dernière opérateur en combinaison de
    négation, de conjonction et de disjonction. *)
-(* Et (Ou (f, g), Ou (Non f, Non g)) *)
 let rec transform : formule -> formule = function
   | Imp (f, g) -> Ou (Non f, g)
   | Xor (f, g) -> Ou (Et (f, Non g), Et (Non f, g))
@@ -20,7 +19,31 @@ let rec transform : formule -> formule = function
   | Non f -> Non (transform f)
   | _ as f -> f
 
-(*obliger de retourner couple car sinon le cas de que top dans la formule porlbème*)
+(*obliger de retourner couple car sinon le cas de que top dans la formule
+   porlbème*)
+let rec tab_methode (atoms : formule list) : formule list -> bool * formule list
+    = function
+  | [] -> (true, atoms)
+  | x :: xs -> (
+      match x with
+      | Bot -> (false, atoms)
+      | Top -> tab_methode atoms xs
+      | Atome a ->
+          if List.exists (fun x -> x = Non (Atome a)) atoms then (false, atoms)
+          else tab_methode (x :: atoms) xs
+      | Non (Atome a) ->
+          if List.exists (fun x -> x = Atome a) atoms then (false, atoms)
+          else tab_methode (x :: atoms) xs
+      | Et (f, g) -> tab_methode atoms ([ f; g ] @ xs)
+      | Non (Ou (f, g)) -> tab_methode atoms ([ Non f; Non g ] @ xs)
+      | Ou (f, g) ->
+          let a, b = tab_methode atoms ([ f ] @ xs) in
+          if a then (a, b) else tab_methode atoms ([ g ] @ xs)
+      | Non (Et (f, g)) ->
+          let a, b = tab_methode atoms ([ Non f ] @ xs) in
+          if a then (a, b) else tab_methode atoms ([ Non g ] @ xs)
+      | _ -> tab_methode atoms (transform x :: xs))
+
 let rec foo (atoms : formule list) : formule list -> bool * formule list =
   function
   | [] -> (true, atoms)
@@ -30,10 +53,12 @@ let rec foo (atoms : formule list) : formule list -> bool * formule list =
       | Top -> foo atoms xs
       | Atome a ->
           if List.exists (fun x -> x = Non (Atome a)) atoms then (false, atoms)
-          else foo (x :: atoms) xs
+          else
+            foo (if List.exists (( = ) x) atoms then atoms else x :: atoms) xs
       | Non (Atome a) ->
           if List.exists (fun x -> x = Atome a) atoms then (false, atoms)
-          else foo (x :: atoms) xs
+          else
+            foo (if List.exists (( = ) x) atoms then atoms else x :: atoms) xs
       | Et (f, g) -> foo atoms ([ f; g ] @ xs)
       | Non (Ou (f, g)) -> foo atoms ([ Non f; Non g ] @ xs)
       | Ou (f, g) ->
@@ -44,14 +69,14 @@ let rec foo (atoms : formule list) : formule list -> bool * formule list =
           if a then (a, b) else foo atoms ([ Non g ] @ xs)
       | _ -> foo atoms (transform x :: xs))
 
-(* Teste si une formule est satisfaisable, selon la méthode des tableaux.  *)
-let tableau_sat (f : formule) : bool = fst (foo [] [ f ])
+(** Teste si une formule est satisfaisable, selon la méthode des tableaux.  *)
+let tableau_sat (f : formule) : bool = fst (tab_methode [] [ f ])
 
-(* Teste si une formule est satisfaisable, renvoyant None si ce n'est pas le cas
-      et Some res sinon, où res est une liste de couples (atome, Booléen)
-      suffisants pour que la formule soit vraie. *)
+(** Teste si une formule est satisfaisable, renvoyant None si ce n'est pas le
+    cas et Some res sinon, où res est une liste de couples (atome, Booléen)
+    suffisants pour que la formule soit vraie. *)
 let tableau_ex_sat (f : formule) : (string * bool) list option =
-  let r = foo [] [ f ] in
+  let r = tab_methode [] [ f ] in
   if not (fst r) then None
   else
     Some
@@ -60,10 +85,12 @@ let tableau_ex_sat (f : formule) : (string * bool) list option =
            match f with
            | Atome a -> (a, true)
            | Non (Atome a) -> (a, false)
-           | _ -> failwith "sa ne fonctionne pas la")
+           | _ ->
+               failwith
+                 "tableau_ex_sat : la liste ne contient pas que des Atomes")
          (snd r))
 
-(* Renvoie la liste des listes de couples (atome, Booléen) suffisants pour que
+(** Renvoie la liste des listes de couples (atome, Booléen) suffisants pour que
       la formule soit vraie, selon la méthode des tableaux.*)
 let tableau_all_sat : formule -> (string * bool) list list =
  fun _ -> failwith "to do"
@@ -221,8 +248,8 @@ let rec quine_ex_sat : formule -> (string * bool) list option =
           | Some b -> Some ((a, false) :: b)
           | _ -> None))
 
-(** Renvoie la liste des listes de couples (atome, Booléen) suffisants pour que la formule soit vraie,
-         selon la formule de Quine. *)
+(** Renvoie la liste des listes de couples (atome, Booléen) suffisants pour que 
+    la formule soit vraie, selon la formule de Quine. *)
 let rec quine_all_sat : formule -> (string * bool) list list =
  fun f ->
   match choix_atome f with
@@ -236,7 +263,19 @@ let rec test y = function
   | 0 -> []
   | n ->
       let f = random_form [ "a"; "b"; "c"; "d"; "e" ] y in
-      if quine_sat f <> tableau_sat f then [ f ] else test y (n - 1)
+      if
+        let a = quine_ex_sat f and b = tableau_ex_sat f in
+        let comp a = function
+          | None -> ( match a with None -> true | _ -> false)
+          | Some l -> (
+              match a with
+              | None -> false
+              | Some l' ->
+                  List.equal ( = ) (List.sort compare l) (List.sort compare l'))
+        in
+        not (comp a b)
+      then [ f ]
+      else test y (n - 1)
 
 let a = Nor (Diff (Atome "b", Atome "c"), Atome "d")
 (* tableau_sat  *)

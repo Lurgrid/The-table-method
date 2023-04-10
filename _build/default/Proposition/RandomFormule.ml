@@ -1,19 +1,20 @@
 open Formule
 
-(* random_atome atoms renvoie une formule qui est constitué que d'un atome tiré
-   de facon pseudo-aléatoire dans la liste atoms de string supposé non vide. *)
+(** random_atome, atoms renvoie une formule qui est constitué que d'un atome 
+   tiré de facon pseudo-aléatoire dans la liste atoms de string supposé non 
+   vide. *)
 let random_atome : string list -> formule = function
   | [] -> failwith "random_atome : Atoms cannot be empty."
   | atoms -> Atome (List.nth atoms (Random.int (List.length atoms)))
 
-(* random_n_operator renvoie une formule constitué d'un opérateur nullaire tiré
-   de facon pseudo-aléatoire. *)
+(** random_n_operator, renvoie une formule constitué d'un opérateur nullaire 
+   tiré de facon pseudo-aléatoire. *)
 let random_n_operator : formule = match Random.int 2 with 0 -> Bot | _ -> Top
 
-(* random_u_operator renvoie la négation de la formule f. *)
+(** random_u_operator, renvoie la négation de la formule f. *)
 let random_u_operator (f : formule) : formule = Non f
 
-(* random_b_operator renvoie une formule constitué d'une opération binaire tiré
+(** random_b_operator, renvoie une formule constitué d'une opération binaire tiré
    de facon pseudo-aléatoire d'opérande f et g. *)
 let random_b_operator (f : formule) (g : formule) : formule =
   match Random.int 8 with
@@ -26,7 +27,7 @@ let random_b_operator (f : formule) (g : formule) : formule =
   | 6 -> Diff (f, g)
   | _ -> Equiv (f, g)
 
-(* random_form atoms k renvoie une formule pseudo-aléatoire
+(** random_form atoms k, renvoie une formule pseudo-aléatoire
    avec k opérateurs et des atomes de la liste atoms, liste
    supposée non vide. *)
 let rec random_form (atoms : string list) : int -> formule = function
