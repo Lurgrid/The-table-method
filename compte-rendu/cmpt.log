@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.7)  26 APR 2023 21:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.7)  26 APR 2023 21:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -537,7 +537,7 @@ LaTeX Info: Redefining \nameref on input line 35.
 \@outlinefile=\write4
 \openout4 = `cmpt.out'.
 
-<logo-univ-rouen-normandie-noir.png, id=7, 433.1382pt x 156.585pt>
+<logo-univ-rouen-normandie-noir.png, id=23, 433.1382pt x 156.585pt>
 File: logo-univ-rouen-normandie-noir.png Graphic file (type png)
 <use logo-univ-rouen-normandie-noir.png>
 Package pdftex.def Info: logo-univ-rouen-normandie-noir.png  used on input line 37.
@@ -548,23 +548,34 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 41.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo-univ-rouen-normandie-noir.png>] (./cmpt.aux)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo-univ-rouen-normandie-noir.png>] (./cmpt.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 2.
+)
+\tf@toc=\write5
+\openout5 = `cmpt.toc'.
+
+ [2] [3] (./cmpt.aux)
 Package rerunfilecheck Info: File `cmpt.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+(rerunfilecheck)             Checksum: 41A8AC427FABD4A49F012E6E2673B644;701.
  ) 
 Here is how much of TeX's memory you used:
- 16243 strings out of 480145
- 272039 string characters out of 5893301
- 605553 words of memory out of 5000000
- 33941 multiletter control sequences out of 15000+600000
- 474326 words of font info for 37 fonts, out of 8000000 for 9000
+ 16285 strings out of 480145
+ 272455 string characters out of 5893301
+ 605566 words of memory out of 5000000
+ 33965 multiletter control sequences out of 15000+600000
+ 479085 words of font info for 48 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  94i,9n,92p,426b,426s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk>
-Output written on cmpt.pdf (1 page, 66508 bytes).
+ </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk>
+Output written on cmpt.pdf (3 pages, 85069 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 33 compressed objects within 1 object stream
- 2 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 204 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
+ 8 named destinations out of 1000 (max. 500000)
+ 50 words of extra memory for PDF output out of 10000 (max. 10000000)
 
