@@ -15,6 +15,7 @@
 \usepackage{hyperref}
 \usepackage{array}
 \usepackage{float}
+\usepackage{caption}
 
 \renewcommand{\thesection}{\Roman{section}} 
 \renewcommand\thesubsection{\arabic{subsection}}
@@ -28,7 +29,7 @@
 
 %--- begin document ------------------------------------------------------------
 
-\title{Projet de raisonnement propositionelle}
+\title{Projet de raisonnement propositionnel}
 \author{Edouard.H Théo.R.V}
 \date{2022--2023}
 
@@ -41,15 +42,15 @@
 
     \begin{abstract}
         Ce document constitue notre compte rendu du projet de raisonnement
-        propositionelle traitent d'une implémentation de la méhtode des 
+        propositionnel traitent d'une implémentation de la méthode des 
         tableaux et de fonction de test. Il s'agit d'une méthode permettant de 
-        déterminer la satisfaisabiliter d'une formule booléen. Les fonctions de 
-        test permette de vérifié empiriquement l'implémentation de la méthode.  
+        déterminer la satisfesabiliter d'une formule booléenne. Les fonctions de 
+        test permettent de vérifier empiriquement l'implémentation de la méthode.  
         
         Dans un premier temps, nous présenterons notre implémentation de la 
-        méthode des tableaux et des divers choix présent dans celle-ci. Ensuite,
-        nous présenterons nos fonctions de test. Pour finir, nous aborderons les
-        difficulters liés à la production de ce projet.
+        méthode des tableaux et des divers choix présent dans celle-ci. Pour 
+        finir, nous aborderons les difficultés liées à la production de ce 
+        projet.
     \end{abstract}
 
     \newpage
@@ -59,7 +60,124 @@
     \newpage
 
     \section{Implémentation de la méthode des tableaux}
-    \section{Les fonctions de teste}
-    \section{Les difficulter rencontré}
+
+    \subsection{Formule}
+
+    Tout d'abord, nous avons dès le début de la conception de ce projet mis en 
+    place les opérateurs étendus vus en TD.\@ On peut notamment citée les 
+    opérateurs, \textbf{xor}, \textbf{nor}, \textbf{nand}, \textbf{diff} et 
+    \textbf{equiv} de symbole respectif $\oplus$, $\uparrow$, $\downarrow$, 
+    $\setminus$ et $\Leftrightarrow$. 
+
+    La fonction \textbf{string\_of\_formule} est une fonction récursive non 
+    terminale, ce choix est dû à plusieurs raisons. La première étant que sa 
+    complexité espace sera logarithmique par la division de la formule par deux
+    a chaque appel récursif. La deuxième raison réside dans l'hypothèse que les
+    formule afficher ne devrais pas être d'une taille démesurée enfaite une 
+    formule trop grande ne pourrait pas être affichée sur un terminal de taille
+    standard. De plus ce choix favorise la compréhension de cette fonction.
+
+    En ce qui concerne la fonction \textbf{eval} ayant déjà implémenté la
+    partie de `base' en TP tout le travail, c'est focaliser sur les opérateurs
+    étendus. Ces opérations n'étant pas implémenté de façon standard en Ocaml,
+    nous avons donc à partir des tables de vérités mises en place des formules 
+    équivalente permettant alors leur implémentation, voir 
+    table~\ref{tab:tab-verite} pour les formules équivalente résultant des 
+    tables de vérités.  
+
+    \begin{table}[H]
+        \centering
+        \hfill
+        $\begin{array}{c c c}
+            \hline
+            a & b & a \oplus b\\
+            \hline
+            0 & 0 & 0\\
+            0 & 1 & 1\\
+            1 & 0 & 1\\
+            1 & 1 & 0\\
+            \hline
+            \multicolumn{3}{c}{(a \setminus b) \lor (b \setminus a)}
+        \end{array}
+        \hfill
+        \begin{array}{c c c}
+            \hline
+            a & b & a \uparrow b\\
+            \hline
+            0 & 0 & 1\\
+            0 & 1 & 1\\
+            1 & 0 & 1\\
+            1 & 1 & 0\\
+            \hline
+            \multicolumn{3}{c}{\lnot (a \land b)}
+        \end{array}
+        \hfill
+        \begin{array}{c c c}
+            \hline
+            a & b & a \downarrow b\\
+            \hline
+            0 & 0 & 1\\
+            0 & 1 & 0\\
+            1 & 0 & 0\\
+            1 & 1 & 0\\
+            \hline
+            \multicolumn{3}{c}{\lnot (a \lor b)}
+        \end{array}
+        \hfill
+        \begin{array}{c c c}
+            \hline
+            a & b & a \setminus b\\
+            \hline
+            0 & 0 & 0\\
+            0 & 1 & 1\\
+            1 & 0 & 1\\
+            1 & 1 & 0\\
+            \hline
+            \multicolumn{3}{c}{a \lor b}
+        \end{array}
+        \hfill
+        \begin{array}{c c c}
+            \hline
+            a & b & a \Leftrightarrow b\\
+            \hline
+            0 & 0 & 0\\
+            0 & 1 & 1\\
+            1 & 0 & 1\\
+            1 & 1 & 0\\
+            \hline
+            \multicolumn{3}{c}{(a \to b) \land (b \to a)}
+        \end{array}$
+        \hfill
+        \captionsetup{position=bottom}
+        \caption{Tables de vérités et formule équivalente.}\label{tab:tab-verite} 
+    \end{table}
+
+    \subsection{RandomFormule}
+
+    Pour la fonction \textbf{random\_form}, nous avons fais le choix de la 
+    divisé en plusieur sous-fonction. Un tel choix permet une compréhension plus
+    aisé du traitement effectué dans la fonction. Les quatres fonctions 
+    \textbf{random\_atome}, \textbf{random\_n\_operator}, 
+    \textbf{random\_u\_operator} et \textbf{random\_b\_operator} correponde 
+    chacune à l'obtention d'un élément de façon pseduo-aléatoire, un atome, un 
+    opérateurs nullaire, unaire et binaire respectivement au fonction sité plus 
+    haut. Une telle division permet aussi de facilité un possible futur ajout 
+    d'opérateurs, d'où la création d'une fonction pour obtenir un opérateur 
+    unaire de façon alétoire bien qu'il n'aille qu'un seul. Toutes les autres 
+    fonction obtients l'element cible en tirant un nombre pseudo-aléatoire à 
+    l'aide du module \textbf{Random}.
+    
+    \subsection{}
+
+    \subsection{Test}
+
+    La fonction \textbf{to\_alea\_inter}, a été implémentée à l'aide d'une 
+    fonction auxiliaire qui sera renvoyer à l'utilisateur partiellement 
+    exécuter (sans tous ces paramètres, pour renvoyer une fonction de type 
+    interprétation).
+
+    \section{Les difficultés rencontrées}
+    
     \section{Conclusion}
+
 \end{document}
