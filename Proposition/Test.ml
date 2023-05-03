@@ -36,6 +36,4 @@ let test_valid (n : int) : bool =
   let f = random_form [ "a"; "b"; "c"; "d"; "e" ] n in
   Printf.printf "%s\n" (string_of_formule f);
   let a = ex_satt f and b = all_satt f in
-  Printf.printf "ex_satt: %b\n" a;
-  Printf.printf "all_satt : %b\n" b;
   a && b

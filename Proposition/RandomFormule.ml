@@ -9,7 +9,7 @@ let random_atome : string list -> formule = function
 
 (** random_n_operator, renvoie une formule constitué d'un opérateur nullaire 
    tiré de facon pseudo-aléatoire. *)
-let random_n_operator : formule = match Random.int 2 with 0 -> Bot | _ -> Top
+let random_n_operator : formule = if Random.bool () then Top else Bot
 
 (** random_u_operator, renvoie la négation de la formule f. *)
 let random_u_operator (f : formule) : formule = Non f
