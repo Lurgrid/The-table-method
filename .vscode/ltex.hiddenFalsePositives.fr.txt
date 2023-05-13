@@ -1,0 +1,2 @@
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QElle renvoie un couple de booléen et d'une liste, d'atome list prouvant sa satisfaisabilité dans le cas ou la formule f l'est.\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QEn effet, la méthode des tableaux décompose une formule pour construire un arbre permettant de déterminer la satisfaisabilité de cette formule.\\E$"}

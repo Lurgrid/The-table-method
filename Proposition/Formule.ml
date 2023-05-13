@@ -64,3 +64,5 @@ let rec eval (i : interpretation) : formule -> bool = function
   | Atome c -> i c
   | Bot -> false
   | Top -> true
+
+let x = (Xor ((Xor ((Atome "e"), (Atome "d"))), (Ou ((Atome "e"), (Atome "d")))));;

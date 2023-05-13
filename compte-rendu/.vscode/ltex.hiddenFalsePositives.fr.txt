@@ -1,0 +1,3 @@
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QLes quatre fonctions randomatome, randomnoperator, randomuoperator et randomboperator corresponde chacune à l'obtention d'un élément de façon pseudo-aléatoire, un atome, un opérateur nullaire, unaire et binaire respectivement aux fonctions citées plus haut.\\E$"}
+{"rule":"ACCORD_SUJET_VERBE","sentence":"^\\QToutes les fonctions a implémenté dans le source Tableaux.ml, résulte de la méthode des tableaux.\\E$"}
+{"rule":"D_N","sentence":"^\\QToutes les fonctions a implémenté dans le source Tableaux.ml, résulte de la méthode des tableaux.\\E$"}

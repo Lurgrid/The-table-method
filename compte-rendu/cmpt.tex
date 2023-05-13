@@ -69,6 +69,8 @@
     \textbf{equiv} de symbole respectif $\oplus$, $\uparrow$, $\downarrow$, 
     $\setminus$ et $\Leftrightarrow$. 
 
+    \vphantom{}
+
     La fonction \textbf{string\_of\_formule} est une fonction récursive non 
     terminale, ce choix est dû à plusieurs raisons. La première étant que sa 
     complexité espace sera logarithmique par la division de la formule par deux
@@ -76,6 +78,8 @@
     formule afficher ne devrais pas être d'une taille démesurée enfaite une 
     formule trop grande ne pourrait pas être affichée sur un terminal de taille
     standard. De plus ce choix favorise la compréhension de cette fonction.
+
+    \vphantom{}
 
     En ce qui concerne la fonction \textbf{eval} ayant déjà implémenté la
     partie de `base' en TP tout le travail, c'est focaliser sur les opérateurs
@@ -154,27 +158,70 @@
 
     \subsection{RandomFormule}
 
-    Pour la fonction \textbf{random\_form}, nous avons fais le choix de la 
-    divisé en plusieur sous-fonction. Un tel choix permet une compréhension plus
-    aisé du traitement effectué dans la fonction. Les quatres fonctions 
+    Pour la fonction \textbf{random\_form}, nous avons fait le choix de la divisée en 
+    plusieurs sous-fonctions. Un tel choix permet une compréhension plus
+    aisée du traitement effectué dans la fonction. Les quatre fonctions 
     \textbf{random\_atome}, \textbf{random\_n\_operator}, 
-    \textbf{random\_u\_operator} et \textbf{random\_b\_operator} correponde 
-    chacune à l'obtention d'un élément de façon pseduo-aléatoire, un atome, un 
-    opérateurs nullaire, unaire et binaire respectivement au fonction sité plus 
+    \textbf{random\_u\_operator} et \textbf{random\_b\_operator} corresponde 
+    chacune à l'obtention d'un élément de façon pseudo-aléatoire, un atome, un 
+    opérateur nullaire, unaire et binaire respectivement aux fonctions citées plus 
     haut. Une telle division permet aussi de facilité un possible futur ajout 
     d'opérateurs, d'où la création d'une fonction pour obtenir un opérateur 
-    unaire de façon alétoire bien qu'il n'aille qu'un seul. Toutes les autres 
-    fonction obtients l'element cible en tirant un nombre pseudo-aléatoire à 
-    l'aide du module \textbf{Random}.
-    
-    \subsection{}
+    unaire de façon aléatoire bien qu'il n'aille qu'un seul. Toutes les autres 
+    fonctions obtiennent l'élément cible en tirant un nombre pseudo-aléatoire à 
+    l'aide du module \textbf{Random}. L'algorithme utilisé pour la génération de 
+    cette formule pseudo-aléatoire est celui donné dans le sujet du projet.
+
+    \subsection{Tableaux}
+
+    Toutes les fonctions implémentées dans le fichier source \textbf{Tableaux.ml}, 
+    résulte de l'implémentation de la méthode des tableaux.   
+
+    \vphantom{}
+
+    Pour les fonctions \textbf{tableau\_sat} et \textbf{tableau\_ex\_sat}, nous 
+    avons réunies ces traitement en une seule fonction auxiliaire \textbf{tab\_methode}.
+    Elle renvoie un couple de booléen et d'une liste, d'atome list prouvant sa 
+    satisfaisabilité dans le cas ou la formule f l'est. C'est une fonction récursive
+    non-terminal (car supposant que les formules ont des tailles raisonnable), qui 
+    itère sur la liste de formule qu'il lui reste à traiter. En effet, la méthode 
+    des tableaux décompose une formule pour construire un arbre permettant de 
+    déterminer la satisfaisabilité de cette formule. L'itération sur la liste de 
+    formule permet comme décrite dans la méthode d'ajouter en bout de `branche'
+    les formules à traiter par la suite. Comme décris dans cette méthode, l'opérateur
+    \textbf{bot} conclue à une fermeture de branche, c'est-à-dire que cette 
+    branche ne peut pas être satisfaisable d'où le retours pour cette branche de 
+    la valeur \textbf{false} et d'une liste d'atomes vide. Pour le cas de 
+    \textbf{Top}, la fonction passe à la prochaine sous-formule à traiter en 
+    conservant les atomes rencontrée précédemment. En cas de rencontre d'un 
+    atome qu'il sagise de sa négation ou non, une recherche dans la liste d'atome
+    déjà rencontrée permet de savoir si sa négation est présente, dans ce cas 
+    la branche est fermé (donc de même retours que pour l'operateur \textbf{bot})
+    sinon l'ajoute à la liste d'atome puis éffectue le prochain traitement. La 
+    rencontre d'une conjonction et d'une négation de disjonction, entraine 
+    l'ajout en queue de liste des deux opérandes et de leurs négation 
+    respectivement et continue le traitement. Cette ajout est mis en place par 
+    une concaténation de liste, pour permettre facilement cette ajout en queue.
+    En ce qui concerne la disjonction et la négation de conjonction, nous créons 
+    un `noeud' à la fin de la branche, 
 
     \subsection{Test}
 
     La fonction \textbf{to\_alea\_inter}, a été implémentée à l'aide d'une 
     fonction auxiliaire qui sera renvoyer à l'utilisateur partiellement 
     exécuter (sans tous ces paramètres, pour renvoyer une fonction de type 
-    interprétation).
+    interprétation). On peut remarquer l'utilisation de la fonction 
+    \textbf{List.assoc\_opt}, qui permet de rechercher dans une liste de couple 
+    clé valeur (a, b) la valeur de b qui corresponds à la valeur de clé passer en 
+    paramètres. On remarque quelle renvoie \textbf{None} en cas d'échec et 
+    \textbf{Some b} en cas succès.
+
+    \vphantom{}
+
+    Pour la fonction \textbf{test\_valid}, nous utilisont des sous-fonctions 
+    \textbf{ex\_sat}, \textbf{all\_sat}. Chacune visent à vérifier la véracité
+    des retours des fonctions \textbf{tableau\_ex\_sat} et 
+    \textbf{tableau\_all\_sat} respectivement.
 
     \section{Les difficultés rencontrées}
     
