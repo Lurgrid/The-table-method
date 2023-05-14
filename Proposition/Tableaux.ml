@@ -29,18 +29,14 @@ let rec tab_methode (atoms : formule list) : formule list -> bool * formule list
       | Non (Atome a) ->
           if List.exists (fun x -> x = Atome a) atoms then (false, [])
           else tab_methode (x :: atoms) xs
-      | Et (f, g) -> tab_methode atoms (xs @ [ f; g ])
-      | Non (Ou (f, g)) -> tab_methode atoms (xs @ [ Non f; Non g ])
+      | Et (f, g) -> tab_methode atoms (f :: g :: xs)
+      | Non (Ou (f, g)) -> tab_methode atoms (Non f :: Non g :: xs)
       | Ou (f, g) ->
-          let a, b = tab_methode atoms xs in 
-          if not a then (false, []) else let a', b' = (tab_methode b [ f ]) in
-          if a' then (a', b') else tab_methode b [ g ]
-
-          (* let a, b = tab_methode atoms (xs @ [ f ]) in
-          if a then (a, b) else tab_methode atoms (xs @ [ g ]) *)
+          let a, b = tab_methode atoms (f :: xs) in
+          if a then (a, b) else tab_methode atoms (g :: xs)
       | Non (Et (f, g)) ->
-          let a, b = tab_methode atoms (xs @ [ Non f ]) in
-          if a then (a, b) else tab_methode atoms (xs @ [ Non g ])
+          let a, b = tab_methode atoms (Non f :: xs) in
+          if a then (a, b) else tab_methode atoms (Non g :: xs)
       | _ -> tab_methode atoms (transform x :: xs))
 
 (** Teste si une formule est satisfaisable, selon la méthode des tableaux.  *)
@@ -79,11 +75,11 @@ let tableau_all_sat (f : formule) : (string * bool) list list =
             if List.exists (fun x -> x = Atome a) atoms then []
             else
               aux (if List.exists (( = ) x) atoms then atoms else x :: atoms) xs
-        | Et (f, g) -> aux atoms (xs @ [ f; g ])
-        | Non (Ou (f, g)) -> aux atoms (xs @ [ Non f; Non g ])
-        | Ou (f, g) -> aux atoms ([ f ] @ xs) @ aux atoms (xs @ [ g ])
+        | Et (f, g) -> aux atoms (f :: g :: xs)
+        | Non (Ou (f, g)) -> aux atoms (Non f :: Non g :: xs)
+        | Ou (f, g) -> aux atoms (f :: xs) @ aux atoms (g :: xs)
         | Non (Et (f, g)) ->
-            aux atoms ([ Non f ] @ xs) @ aux atoms (xs @ [ Non g ])
+            aux atoms (Non f :: xs) @ aux atoms (Non g :: xs)
         | _ -> aux atoms (transform x :: xs))
   in
   aux [] [ f ]

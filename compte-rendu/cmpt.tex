@@ -194,16 +194,28 @@
     la valeur \textbf{false} et d'une liste d'atomes vide. Pour le cas de 
     \textbf{Top}, la fonction passe à la prochaine sous-formule à traiter en 
     conservant les atomes rencontrée précédemment. En cas de rencontre d'un 
-    atome qu'il sagise de sa négation ou non, une recherche dans la liste d'atome
+    atome qu'il s'agisse de sa négation ou non, une recherche dans la liste d'atome
     déjà rencontrée permet de savoir si sa négation est présente, dans ce cas 
-    la branche est fermé (donc de même retours que pour l'operateur \textbf{bot})
-    sinon l'ajoute à la liste d'atome puis éffectue le prochain traitement. La 
+    la branche est fermé (donc de mêmes retours que pour l'opérateur \textbf{bot})
+    sinon l'ajoute à la liste d'atome puis effectué le prochain traitement. La 
     rencontre d'une conjonction et d'une négation de disjonction, entraine 
-    l'ajout en queue de liste des deux opérandes et de leurs négation 
-    respectivement et continue le traitement. Cette ajout est mis en place par 
-    une concaténation de liste, pour permettre facilement cette ajout en queue.
+    l'ajout en tête de liste des deux opérandes et de leurs négation 
+    respectivement et continue le traitement.
     En ce qui concerne la disjonction et la négation de conjonction, nous créons 
-    un `noeud' à la fin de la branche, 
+    un `nœud' à la fin de la branche. Ce `nœud' est représenté par une première
+    exécution de la branche avec en tête de celle-ci la sous-formule correspondent 
+    au premier opérande. Si cette exécution renvoie vrai alors la formule est 
+    satisfaisable donc on arrête le traitement sinon le programme exécute une nouvelle 
+    fois cette branche, mais avec en tête cette fois-ci la deuxième opérande. Pour 
+    finir en cas d'apparition d'un opérateur étendu, un appelé à la fonction 
+    \textbf{transform} permet d'exprimer cette opérande en fonction des opérateurs
+    dont le traitement est cité ci-dessus.
+
+    En ce qui concerne la fonction \textbf{tableau\_all\_sat}, le traitement de 
+    tous les opérateurs est identique à celui de la fonction \textbf{tab\_methode}
+    sauf pour la disjonction. En effet, devant renvoyer touts les atomes de toutes 
+    les branches, de ce fait toutes les branches sont traité pour les disjonctions
+    et don  une concaténation de liste permet d'obtenir tous ces atomes.
 
     \subsection{Test}
 

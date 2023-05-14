@@ -42,13 +42,5 @@ let all_sat (f : formule) : bool =
 let test_valid (n : int) : bool =
   let f = random_form [ "a"; "b"; "c"; "d"; "e" ] n in
   Printf.printf "%s\n" (string_of_formule f);
-  ex_sat f
-  (* let a = ex_sat f and b = all_sat f in
-  a && b *)
-
-let rec test n = function 
-  | 0 -> true
-  | x -> if not (test_valid n) then 
-    false
-  else  
-    test n (x- 1);;
+  let a = ex_sat f and b = all_sat f in
+  a && b
