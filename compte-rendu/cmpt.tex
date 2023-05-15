@@ -42,13 +42,13 @@
 
     \begin{abstract}
         Ce document constitue notre compte rendu du projet de raisonnement
-        propositionnel traitent d'une implémentation de la méthode des 
-        tableaux et de fonction de test. Il s'agit d'une méthode permettant de 
-        déterminer la satisfesabiliter d'une formule booléenne. Les fonctions de 
+        propositionnel traite d'une implémentation de la méthode des 
+        tableaux et de fonctions de test. Il s'agit d'une méthode permettant de 
+        déterminer la satisfaisabilité d'une formule booléenne. Les fonctions de 
         test permettent de vérifier empiriquement l'implémentation de la méthode.  
         
         Dans un premier temps, nous présenterons notre implémentation de la 
-        méthode des tableaux et des divers choix présent dans celle-ci. Pour 
+        méthode des tableaux et des divers choix présents dans celle-ci. Pour 
         finir, nous aborderons les difficultés liées à la production de ce 
         projet.
     \end{abstract}
@@ -64,30 +64,31 @@
     \subsection{Formule}
 
     Tout d'abord, nous avons dès le début de la conception de ce projet mis en 
-    place les opérateurs étendus vus en TD.\@ On peut notamment citée les 
+    place les opérateurs étendus vus en TD.\@ On peut notamment citées les 
     opérateurs, \textbf{xor}, \textbf{nor}, \textbf{nand}, \textbf{diff} et 
-    \textbf{equiv} de symbole respectif $\oplus$, $\uparrow$, $\downarrow$, 
+    \textbf{equiv} de symboles respectifs $\oplus$, $\uparrow$, $\downarrow$, 
     $\setminus$ et $\Leftrightarrow$. 
 
     \vphantom{}
 
     La fonction \textbf{string\_of\_formule} est une fonction récursive non 
     terminale, ce choix est dû à plusieurs raisons. La première étant que sa 
-    complexité espace sera logarithmique par la division de la formule par deux
-    a chaque appel récursif. La deuxième raison réside dans l'hypothèse que les
-    formule afficher ne devrais pas être d'une taille démesurée enfaite une 
+    complexité espace serait logarithmique par la division de la formule par 
+    deux à chaque appel récursif. La deuxième raison réside dans l'hypothèse que
+    les formules affichées ne devraient pas être d'une taille démesurée, une 
     formule trop grande ne pourrait pas être affichée sur un terminal de taille
     standard. De plus ce choix favorise la compréhension de cette fonction.
 
     \vphantom{}
 
     En ce qui concerne la fonction \textbf{eval} ayant déjà implémenté la
-    partie de `base' en TP tout le travail, c'est focaliser sur les opérateurs
-    étendus. Ces opérations n'étant pas implémenté de façon standard en Ocaml,
-    nous avons donc à partir des tables de vérités mises en place des formules 
-    équivalente permettant alors leur implémentation, voir 
-    table~\ref{tab:tab-verite} pour les formules équivalente résultant des 
-    tables de vérités.  
+    partie de `base' en TP avec les opérateurs \textbf{Ou}, \textbf{Et}, 
+    \textbf{Atome}, \textbf{Imp}, \textbf{Bot}, \textbf{Top} et \textbf{Non},
+    nous allons donc se focaliser sur les opérateurs étendus. Ces opérations 
+    n'étant pas implémentées de façon standard en Ocaml, nous avons donc à 
+    partir des tables de vérités misent en place des formules équivalentes 
+    permettant alors leur implémentation, voir table~\ref{tab:tab-verite} pour 
+    les formules équivalentes résultant des tables de vérités.  
 
     \begin{table}[H]
         \centering
@@ -153,24 +154,25 @@
         \end{array}$
         \hfill
         \captionsetup{position=bottom}
-        \caption{Tables de vérités et formule équivalente.}\label{tab:tab-verite} 
+        \caption{Tables de vérités et formules équivalentes.}\label{tab:tab-verite} 
     \end{table}
 
     \subsection{RandomFormule}\label{random-form}
 
-    Pour la fonction \textbf{random\_form}, nous avons fait le choix de la divisée en 
-    plusieurs sous-fonctions. Un tel choix permet une compréhension plus
-    aisée du traitement effectué dans la fonction. Les quatre fonctions 
+    Pour la fonction \textbf{random\_form}, nous avons fait le choix de la 
+    divisée en plusieurs sous-fonctions. Un tel choix permet une compréhension 
+    plus aisée du traitement effectué dans la fonction. Les quatre fonctions 
     \textbf{random\_atome}, \textbf{random\_n\_operator}, 
-    \textbf{random\_u\_operator} et \textbf{random\_b\_operator} corresponde 
+    \textbf{random\_u\_operator} et \textbf{random\_b\_operator} correspondent 
     chacune à l'obtention d'un élément de façon pseudo-aléatoire, un atome, un 
-    opérateur nullaire, unaire et binaire respectivement aux fonctions citées plus 
-    haut. Une telle division permet aussi de facilité un possible futur ajout 
-    d'opérateurs, d'où la création d'une fonction pour obtenir un opérateur 
-    unaire de façon aléatoire bien qu'il n'aille qu'un seul. Toutes les autres 
-    fonctions obtiennent l'élément cible en tirant un nombre pseudo-aléatoire à 
-    l'aide du module \textbf{Random}. L'algorithme utilisé pour la génération de 
-    cette formule pseudo-aléatoire est celui donné dans le sujet du projet.
+    opérateur nullaire, unaire et binaire respectivement aux fonctions citées 
+    plus haut. Une telle division permet aussi de facilitée un possible futur 
+    ajout d'opérateurs, d'où la création d'une fonction pour obtenir un 
+    opérateur unaire de façon aléatoire bien qu'il n'aille qu'une seule 
+    possibilité. Toutes les autres fonctions obtiennent l'élément cible en 
+    tirant un nombre pseudo-aléatoire à l'aide du module \textbf{Random}. 
+    L'algorithme utilisé pour la génération de cette formule pseudo-aléatoire 
+    est celui donné dans le sujet du projet.
 
     \subsection{Tableaux}
 
@@ -180,98 +182,109 @@
     \vphantom{}
 
     Pour les fonctions \textbf{tableau\_sat} et \textbf{tableau\_ex\_sat}, nous 
-    avons réunies ces traitement en une seule fonction auxiliaire \textbf{tab\_methode}.
-    Elle renvoie un couple de booléen et d'une liste d'atome, liste prouvant sa 
-    satisfaisabilité dans le cas ou la formule f l'est. 
+    avons réunie ces traitements en une seule fonction auxiliaire 
+    \textbf{tab\_methode}. Elle renvoie un couple de booléen et d'une liste 
+    d'atome, liste prouvant sa satisfaisabilité dans le cas ou la formule 
+    \textbf{f} l'est. 
 
-    C'est une fonction récursive non-terminal (car supposant que les formules sont 
-    de tailles raisonnable), qui itère sur la liste de formule qu'il lui reste à 
-    traiter.
+    C'est une fonction récursive non-terminale (car supposant que les formules 
+    sont de tailles raisonnables), qui itère sur la liste de formule.
 
     En effet, la méthode des tableaux décompose une formule pour construire un 
-    arbre permettant de déterminer la satisfaisabilité de cette formule. L'itération 
-    sur la liste de formule permet comme décrite dans la méthode d'ajouter en début 
-    de `branche' les formules à traiter par la suite. 
-    Comme décris dans cette méthode, l'opérateur \textbf{Bot} conclue à une 
+    arbre permettant de déterminer la satisfaisabilité de cette formule. 
+    L'itération sur la liste de formules permet comme décrit dans la méthode 
+    d'ajouter en début de `branche' les formules à traiter par la suite. 
+
+    Comme décrit dans cette méthode, l'opérateur \textbf{Bot} conclue à une 
     fermeture de branche, c'est-à-dire que cette branche ne peut pas être 
-    satisfaisable, d'où le retours pour cette branche de la valeur 
-    \textbf{false} et d'une liste d'atomes vide. 
+    satisfaisable, d'où le retour pour cette branche de la valeur 
+    \textbf{false} et d'une liste d'atomes vides. 
 
     Pour le cas de \textbf{Top}, la fonction passe à la prochaine sous-formule à
-    traiter en conservant les atomes rencontrée précédemment. En cas de rencontre 
-    d'un atome qu'il s'agisse de sa négation ou non, une recherche dans la liste d'atome
-    déjà rencontrée permet de savoir si sa négation est présente, dans ce cas 
-    la branche est fermé (donc de mêmes retours que pour l'opérateur \textbf{Bot})
-    sinon l'ajoute à la liste d'atome puis effectué le prochain traitement. La 
-    rencontre d'une conjonction et d'une négation de disjonction, entraine 
-    l'ajout en tête de liste des deux opérandes et de leurs négation 
+    traiter en conservant les atomes rencontrés précédemment. En cas de 
+    rencontre d'un atome qu'il s'agisse de sa négation ou non, une recherche 
+    dans la liste d'atomes déjà rencontrée permet de savoir si sa négation est 
+    présente, dans ce cas la branche est fermée (donc de même retour que pour 
+    l'opérateur \textbf{Bot}) sinon l'ajoute à la liste d'atomes puis effectue 
+    le prochain traitement. 
+    
+    La rencontre d'une conjonction et d'une négation de disjonction, entraine 
+    l'ajout en tête de liste des deux opérandes et de leurs négations 
     respectivement et continue le traitement.
 
     En ce qui concerne la disjonction et la négation de conjonction, nous créons 
     un `nœud' à la fin de la branche. Ce `nœud' est représenté par une première
     exécution de la branche avec en tête de celle-ci. Si cette exécution renvoie
-    vrai alors la formule est satisfaisable donc on arrête le traitement sinon le 
-    programme exécute une nouvelle fois cette branche, mais avec en tête cette 
-    fois-ci la deuxième opérande. 
+    vrai alors la formule est satisfaisable donc on arrête le traitement sinon 
+    le programme exécute une nouvelle fois cette branche, mais avec en tête 
+    cette fois-ci la deuxième opérande. 
 
     Pour finir en cas d'apparition d'un opérateur étendu, un appel à la fonction 
-    \textbf{transform} permet d'exprimer cette opération en fonction des opérateurs
-    dont le traitement est cité ci-dessus.
+    \textbf{transform} permet d'exprimer cette opération en fonction des 
+    opérateurs dont le traitement est cité ci-dessus.
 
     En ce qui concerne la fonction \textbf{tableau\_all\_sat}, le traitement de 
-    tous les opérateurs est identique à celui de la fonction \textbf{tab\_methode}
-    sauf pour la disjonction. En effet, devant renvoyer touts les atomes de toutes 
-    les branches, de ce fait toutes les branches sont traité pour les disjonctions
-    et une concaténation de liste permet d'obtenir tous ces atomes.
+    tous les opérateurs est identique à celui de la fonction 
+    \textbf{tab\_methode} sauf pour la disjonction. En effet, devant renvoyer 
+    touts les atomes de toutes les branches, de ce fait toutes les branches sont 
+    traité pour les disjonctions. Puis tous les résultats des branches sont mis 
+    dans une liste de liste d'atomes
 
     \subsection{Test}
 
     La fonction \textbf{to\_alea\_inter}, a été implémentée à l'aide d'une 
-    fonction auxiliaire qui sera renvoyer à l'utilisateur partiellement 
-    exécuter (sans tous ces paramètres, pour renvoyer une fonction de type 
+    fonction auxiliaire qui sera renvoyée à l'utilisateur partiellement 
+    exécuté (sans tous ses paramètres, pour renvoyer une fonction de type 
     interprétation). On peut remarquer l'utilisation de la fonction 
     \textbf{List.assoc\_opt}, qui permet de rechercher dans une liste de couple 
-    clé valeur (a, b) la valeur de b qui corresponds à la valeur de clé passer en 
+    clé valeur (a, b) la valeur de b qui correspond à la valeur de clé passée en 
     paramètres. On remarque quelle renvoie \textbf{None} en cas d'échec et 
-    \textbf{Some b} en cas succès. L'interprétation renvoyer par cette fonction 
+    \textbf{Some b} en cas succès. L'interprétation renvoyée par cette fonction 
     comble les atomes qui ne sont pas présent dans la liste \textbf{sbl} (liste 
     de couple booléen string) par un booléen choisi de façon pseudo-aléatoire.
 
     La fonction permettant de tester empiriquement notre implémentation de la 
     méthode des tableaux est \textbf{test\_valid}. Pour ce test, elle va 
-    générer une formule pseudo-aléatoire, à l'aide de la fonction \textbf{random\_form}
-    (décrite dans la sous-section~\ref{random_form}) de n opérateur et d'atome 
-    possible la liste `a', `b', `c' et `d'. Ensuite elle va exécuter les fonctions 
-    \textbf{ex\_sat} et \textbf{all\_sat} qui corresponde à un appelle à la fonction 
-    \textbf{eval} sur les listes d'atome en résultat des fonctions 
-    \textbf{tableau\_ex\_sat} et \textbf{tableau\_all\_sat}. La fonction 
-    \textbf{eval} utilise l'interprétation renvoyer par la fonction 
-    \textbf{to\_alea\_inter}.
+    générer une formule pseudo-aléatoire, à l'aide de la fonction 
+    \textbf{random\_form} (décrite dans la sous-section~\ref{random-form}) de 
+    \textbf{n} opérateurs et d'atomes possible la liste `a', `b', `c' et `d'. 
+    Ensuite elle va exécuter les fonctions \textbf{ex\_sat} et \textbf{all\_sat} 
+    qui correspondent à un appel à la fonction \textbf{eval} sur les listes 
+    d'atomes en résultat des fonctions \textbf{tableau\_ex\_sat} et 
+    \textbf{tableau\_all\_sat}. La fonction \textbf{eval} utilise 
+    l'interprétation renvoyée par la fonction \textbf{to\_alea\_inter}.
+
+    \newpage
 
     \section{Les difficultés rencontrées}
 
-    Tous d'abord, notre première difficulté à été la simplification des 
+    Tous d'abord, notre première difficulté a été la simplification des 
     opérateurs en fonction des opérateurs de `base'. Nous avons dû réaliser des
-    tables de vérités, à fin de trouver des opérations correspondantes (voir 
+    tables de vérités, a fin de trouver les opérations correspondantes (voir 
     tableau~\ref{tab:tab-verite}).
 
-    Une autre difficulté a été une tentative de simplification mais aussi de 
+    Une autre difficulté a été une tentative de simplification, mais aussi de 
     factorisation des codes des fonctions \textbf{tab\_methode} et 
     \textbf{tableau\_all\_sat}. En effet, on voit très clairement que les deux 
-    fonction on un codes très similaires. Mais malgré ces diverses tentatives 
-    aucune améliorations du code n'a pu être trouvé.  
+    fonctions ont un code très similaire. Mais malgré ces diverses tentatives 
+    aucune amélioration du code n'a pu être trouvée.  
 
     Pour finir, notre plus grosse difficulté qui ne résulte pas forcément de ce 
-    projet, a été la compréhension de l'énonce mais aussi la production de ce 
+    projet, a été la compréhension de l'énonce, mais aussi la production de ce 
     rapport.
     
     \section{Conclusion}
 
-    Pour conclure, nous avons implémenté cette méthode sans trop de difficulté 
-    après l'avoir compris. Nous l'avons testé de nombreuse fois à l'aide de la 
+    Pour conclure, nous avons implémenté cette méthode sans trop de difficultés
+    après l'avoir compris. Nous l'avons testé de nombreuses fois à l'aide de la 
     fonction \textbf{test\_valid}. Elle reste plus efficace que l'exécution d'un 
     algorithme calculant la table de vérité d'une formule dans la plupart 
     des cas. Malgré cela, il reste de nombreuses améliorations à produire 
-    notamment sur la factorisation du code.   
+    notamment sur la factorisation du code.  
+    
+    \subsection{Remerciement}
+
+    Merci à, Erwan LIEVIN, pour avoir effectué une relecture des fautes 
+    d'orthographes présentes dans ce compte-rendu.
 
 \end{document}
