@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.7)  15 MAY 2023 08:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.7)  15 MAY 2023 08:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -569,41 +569,4 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 42.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo-univ-rouen-normandie-noir.png>] (./cmpt.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 2.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 2.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 2.
-)
-\tf@toc=\write5
-\openout5 = `cmpt.toc'.
-
- [2] [3] [4]
-
-LaTeX Warning: Reference `random_form' on page 5 undefined on input line 243.
-
-[5] (./cmpt.aux)
-
-LaTeX Warning: There were undefined references.
-
-Package rerunfilecheck Info: File `cmpt.out' has not changed.
-(rerunfilecheck)             Checksum: 60B1DA7E16CC1C6024F710463C02656C;940.
- ) 
-Here is how much of TeX's memory you used:
- 17528 strings out of 480145
- 296950 string characters out of 5893301
- 641443 words of memory out of 5000000
- 35193 multiletter control sequences out of 15000+600000
- 480535 words of font info for 50 fonts, out of 8000000 for 9000
- 59 hyphenation exceptions out of 8191
- 94i,9n,117p,426b,428s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/renauth6/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on cmpt.pdf (5 pages, 147650 bytes).
-PDF statistics:
- 350 PDF objects out of 1000 (max. 8388607)
- 112 compressed objects within 2 object streams
- 15 named destinations out of 1000 (max. 500000)
- 74 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+{/var/lib/t

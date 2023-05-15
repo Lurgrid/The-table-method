@@ -238,12 +238,20 @@
     de couple booléen string) par un booléen choisi de façon pseudo-aléatoire.
 
     La fonction permettant de tester empiriquement notre implémentation de la 
-    méthode des tableaux est \textbf{test\_valid}. Pour se teste, elle va 
+    méthode des tableaux est \textbf{test\_valid}. Pour ce test, elle va 
     générer une formule pseudo-aléatoire, à l'aide de la fonction \textbf{random\_form}
     (décrite dans la sous-section~\ref{random_form}) de n opérateur et d'atome 
-    possible la liste [ "a"; "b"; "c"; "d" ]
+    possible la liste `a', `b', `c' et `d'. Ensuite elle va exécuter les fonctions 
+    \textbf{ex\_sat} et \textbf{all\_sat} qui corresponde à un appelle à la fonction 
+    \textbf{eval} sur les listes d'atome en résultat des fonctions 
+    \textbf{tableau\_ex\_sat} et \textbf{tableau\_all\_sat}. La fonction 
+    \textbf{eval} utilise l'interprétation renvoyer par la fonction 
+    \textbf{to\_alea\_inter}.
 
     \section{Les difficultés rencontrées}
+
+    Tous d'abord, notre premières difficultés à été la simplification des 
+    opérateurs 
     
     \section{Conclusion}
 
