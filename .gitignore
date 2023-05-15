@@ -1,2 +1,18 @@
-_build/*
-_build
+# Ignore all
+*
+
+# Except
+!*.tex
+!*.png
+!*.pdf
+!.gitignore
+!*.md
+!*.ml
+!LICENSE
+!dune
+!dune-project
+
+!optl/
+!Proposition/
+
+!compte-rendu/
