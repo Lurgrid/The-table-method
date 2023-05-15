@@ -40,7 +40,7 @@ let all_sat (f : formule) : bool =
       en une interprétation évaluant la formule f comme vraie et retournant true 
       si tous les résultats sont corrects, false sinon. *)
 let test_valid (n : int) : bool =
-  let f = random_form [ "a"; "b"; "c"; "d"; "e" ] n in
+  let f = random_form [ "a"; "b"; "c"; "d" ] n in
   Printf.printf "%s\n" (string_of_formule f);
   let a = ex_sat f and b = all_sat f in
   a && b

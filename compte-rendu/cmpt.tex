@@ -156,7 +156,7 @@
         \caption{Tables de vérités et formule équivalente.}\label{tab:tab-verite} 
     \end{table}
 
-    \subsection{RandomFormule}
+    \subsection{RandomFormule}\label{random-form}
 
     Pour la fonction \textbf{random\_form}, nous avons fait le choix de la divisée en 
     plusieurs sous-fonctions. Un tel choix permet une compréhension plus
@@ -181,41 +181,48 @@
 
     Pour les fonctions \textbf{tableau\_sat} et \textbf{tableau\_ex\_sat}, nous 
     avons réunies ces traitement en une seule fonction auxiliaire \textbf{tab\_methode}.
-    Elle renvoie un couple de booléen et d'une liste, d'atome list prouvant sa 
-    satisfaisabilité dans le cas ou la formule f l'est. C'est une fonction récursive
-    non-terminal (car supposant que les formules ont des tailles raisonnable), qui 
-    itère sur la liste de formule qu'il lui reste à traiter. En effet, la méthode 
-    des tableaux décompose une formule pour construire un arbre permettant de 
-    déterminer la satisfaisabilité de cette formule. L'itération sur la liste de 
-    formule permet comme décrite dans la méthode d'ajouter en bout de `branche'
-    les formules à traiter par la suite. Comme décris dans cette méthode, l'opérateur
-    \textbf{bot} conclue à une fermeture de branche, c'est-à-dire que cette 
-    branche ne peut pas être satisfaisable d'où le retours pour cette branche de 
-    la valeur \textbf{false} et d'une liste d'atomes vide. Pour le cas de 
-    \textbf{Top}, la fonction passe à la prochaine sous-formule à traiter en 
-    conservant les atomes rencontrée précédemment. En cas de rencontre d'un 
-    atome qu'il s'agisse de sa négation ou non, une recherche dans la liste d'atome
+    Elle renvoie un couple de booléen et d'une liste d'atome, liste prouvant sa 
+    satisfaisabilité dans le cas ou la formule f l'est. 
+
+    C'est une fonction récursive non-terminal (car supposant que les formules sont 
+    de tailles raisonnable), qui itère sur la liste de formule qu'il lui reste à 
+    traiter.
+
+    En effet, la méthode des tableaux décompose une formule pour construire un 
+    arbre permettant de déterminer la satisfaisabilité de cette formule. L'itération 
+    sur la liste de formule permet comme décrite dans la méthode d'ajouter en début 
+    de `branche' les formules à traiter par la suite. 
+    Comme décris dans cette méthode, l'opérateur \textbf{Bot} conclue à une 
+    fermeture de branche, c'est-à-dire que cette branche ne peut pas être 
+    satisfaisable, d'où le retours pour cette branche de la valeur 
+    \textbf{false} et d'une liste d'atomes vide. 
+
+    Pour le cas de \textbf{Top}, la fonction passe à la prochaine sous-formule à
+    traiter en conservant les atomes rencontrée précédemment. En cas de rencontre 
+    d'un atome qu'il s'agisse de sa négation ou non, une recherche dans la liste d'atome
     déjà rencontrée permet de savoir si sa négation est présente, dans ce cas 
-    la branche est fermé (donc de mêmes retours que pour l'opérateur \textbf{bot})
+    la branche est fermé (donc de mêmes retours que pour l'opérateur \textbf{Bot})
     sinon l'ajoute à la liste d'atome puis effectué le prochain traitement. La 
     rencontre d'une conjonction et d'une négation de disjonction, entraine 
     l'ajout en tête de liste des deux opérandes et de leurs négation 
     respectivement et continue le traitement.
+
     En ce qui concerne la disjonction et la négation de conjonction, nous créons 
     un `nœud' à la fin de la branche. Ce `nœud' est représenté par une première
-    exécution de la branche avec en tête de celle-ci la sous-formule correspondent 
-    au premier opérande. Si cette exécution renvoie vrai alors la formule est 
-    satisfaisable donc on arrête le traitement sinon le programme exécute une nouvelle 
-    fois cette branche, mais avec en tête cette fois-ci la deuxième opérande. Pour 
-    finir en cas d'apparition d'un opérateur étendu, un appelé à la fonction 
-    \textbf{transform} permet d'exprimer cette opérande en fonction des opérateurs
+    exécution de la branche avec en tête de celle-ci. Si cette exécution renvoie
+    vrai alors la formule est satisfaisable donc on arrête le traitement sinon le 
+    programme exécute une nouvelle fois cette branche, mais avec en tête cette 
+    fois-ci la deuxième opérande. 
+
+    Pour finir en cas d'apparition d'un opérateur étendu, un appel à la fonction 
+    \textbf{transform} permet d'exprimer cette opération en fonction des opérateurs
     dont le traitement est cité ci-dessus.
 
     En ce qui concerne la fonction \textbf{tableau\_all\_sat}, le traitement de 
     tous les opérateurs est identique à celui de la fonction \textbf{tab\_methode}
     sauf pour la disjonction. En effet, devant renvoyer touts les atomes de toutes 
     les branches, de ce fait toutes les branches sont traité pour les disjonctions
-    et don  une concaténation de liste permet d'obtenir tous ces atomes.
+    et une concaténation de liste permet d'obtenir tous ces atomes.
 
     \subsection{Test}
 
@@ -226,14 +233,15 @@
     \textbf{List.assoc\_opt}, qui permet de rechercher dans une liste de couple 
     clé valeur (a, b) la valeur de b qui corresponds à la valeur de clé passer en 
     paramètres. On remarque quelle renvoie \textbf{None} en cas d'échec et 
-    \textbf{Some b} en cas succès.
+    \textbf{Some b} en cas succès. L'interprétation renvoyer par cette fonction 
+    comble les atomes qui ne sont pas présent dans la liste \textbf{sbl} (liste 
+    de couple booléen string) par un booléen choisi de façon pseudo-aléatoire.
 
-    \vphantom{}
-
-    Pour la fonction \textbf{test\_valid}, nous utilisont des sous-fonctions 
-    \textbf{ex\_sat}, \textbf{all\_sat}. Chacune visent à vérifier la véracité
-    des retours des fonctions \textbf{tableau\_ex\_sat} et 
-    \textbf{tableau\_all\_sat} respectivement.
+    La fonction permettant de tester empiriquement notre implémentation de la 
+    méthode des tableaux est \textbf{test\_valid}. Pour se teste, elle va 
+    générer une formule pseudo-aléatoire, à l'aide de la fonction \textbf{random\_form}
+    (décrite dans la sous-section~\ref{random_form}) de n opérateur et d'atome 
+    possible la liste [ "a"; "b"; "c"; "d" ]
 
     \section{Les difficultés rencontrées}
     
