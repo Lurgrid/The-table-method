@@ -42,7 +42,7 @@
 
     \begin{abstract}
         Ce document constitue notre compte rendu du projet de raisonnement
-        propositionnel traite d'une implémentation de la méthode des 
+        propositionnel, il traite d'une implémentation de la méthode des 
         tableaux et de fonctions de test. Il s'agit d'une méthode permettant de 
         déterminer la satisfaisabilité d'une formule booléenne. Les fonctions de 
         test permettent de vérifier empiriquement l'implémentation de la méthode.  
@@ -73,7 +73,7 @@
 
     La fonction \textbf{string\_of\_formule} est une fonction récursive non 
     terminale, ce choix est dû à plusieurs raisons. La première étant que sa 
-    complexité espace serait logarithmique par la division de la formule par 
+    complexité espace est logarithmique par la division de la formule en 
     deux à chaque appel récursif. La deuxième raison réside dans l'hypothèse que
     les formules affichées ne devraient pas être d'une taille démesurée, une 
     formule trop grande ne pourrait pas être affichée sur un terminal de taille
@@ -183,7 +183,7 @@
 
     Pour les fonctions \textbf{tableau\_sat} et \textbf{tableau\_ex\_sat}, nous 
     avons réunie ces traitements en une seule fonction auxiliaire 
-    \textbf{tab\_methode}. Elle renvoie un couple de booléen et d'une liste 
+    \textbf{tab\_methode}. Elle renvoie un couple de booléen et une liste 
     d'atome, liste prouvant sa satisfaisabilité dans le cas ou la formule 
     \textbf{f} l'est. 
 
