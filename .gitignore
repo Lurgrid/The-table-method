@@ -11,6 +11,7 @@
 !LICENSE
 !dune
 !dune-project
+!makefile
 
 !optl/
 !Proposition/
